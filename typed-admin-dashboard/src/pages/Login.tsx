@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { useAuth } from "../auth/useAuth"
 import type { Role } from "../auth/auth.types";
+import { Navigate } from "react-router-dom";
 
 export function Login() {
 
-    const { login } = useAuth()
+    const { login, authState } = useAuth()
 
     const [username, setUsername] = useState<string>('');
     const [role, setRole] = useState<Role | ''>('')
@@ -25,6 +26,10 @@ export function Login() {
     function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
         const value = e.target.value
         setRole(value as Role)
+    }
+
+    if (authState.status === 'authenticated') {
+        return <Navigate to='/dashboard' replace />
     }
 
     return (

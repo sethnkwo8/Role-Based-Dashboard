@@ -1,4 +1,4 @@
-import type { AuthContextType, User, Role } from "./auth.types";
+import type { AuthContextType, AuthState, Role } from "./auth.types";
 import { createContext, useState } from "react";
 
 interface AuthProviderProps {
@@ -8,18 +8,18 @@ interface AuthProviderProps {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState<User | null>(null)
+    const [authState, setAuthState] = useState<AuthState>({ status: 'unauthenticated' })
 
     function login(username: string, role: Role) {
-        setUser({ username, role })
+        setAuthState({ status: 'authenticated', user: { username, role } })
     }
 
     function logout(): void {
-        setUser(null)
+        setAuthState({ status: 'unauthenticated' })
     }
 
     const value: AuthContextType = {
-        user,
+        authState,
         login,
         logout
     }

@@ -5,8 +5,13 @@ export interface User {
     role: Role
 }
 
+export type AuthState =
+    | { status: 'loading' }
+    | { status: 'authenticated', user: User }
+    | { status: 'unauthenticated' }
+
 export interface AuthContextType {
-    user: User | null
+    authState: AuthState
     login(username: string, role: Role): void
     logout(): void
 }
