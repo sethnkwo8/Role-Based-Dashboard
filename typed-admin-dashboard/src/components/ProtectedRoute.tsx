@@ -1,12 +1,11 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
 import type { Role } from "../auth/auth.types";
 
 interface ProtectedRouteProps {
     allowedRoles: Role[]
-    children: React.ReactNode
 }
-export function ProtectedRoute({ allowedRoles, children }: ProtectedRouteProps) {
+export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
     const { authState } = useAuth()
 
     if (authState.status === 'loading') {
@@ -21,5 +20,5 @@ export function ProtectedRoute({ allowedRoles, children }: ProtectedRouteProps) 
         }
     }
 
-    return children
+    return <Outlet />
 }

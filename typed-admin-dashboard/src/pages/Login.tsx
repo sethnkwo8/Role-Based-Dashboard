@@ -38,7 +38,7 @@ export function Login() {
                 <h1 className="font-bold text-4xl">Login</h1>
                 <label className="font-bold text-2xl" htmlFor="username">Username</label>
                 <input className="w-full outline-0 rounded-lg border border-black p-2" id="username" onChange={handleChange} required type="text" value={username} />
-                <select id="roleSelect" onChange={handleSelectChange} required value={role}>
+                <select className="" id="roleSelect" onChange={handleSelectChange} required value={role}>
                     <option value="">Select a role</option>
                     <option value="Admin">Admin</option>
                     <option value="User">User</option>
