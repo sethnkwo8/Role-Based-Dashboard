@@ -1,6 +1,6 @@
 import type { AuthContextType, AuthState, Role } from "./auth.types";
 import { createContext, useState } from "react";
-import { hasPermission, ROLE_PERMISSIONS, type Permission } from "./permissions";
+import { hasPermission, type Permission } from "./permissions";
 
 interface AuthProviderProps {
     children: React.ReactNode
