@@ -16,7 +16,29 @@ export default function Dashboard() {
     }, [])
 
 
-    return (
-        <div>Dashboard</div>
-    )
+    if (productState.status === 'loading') {
+        return (
+            <div>
+                <p>Loading...</p>
+            </div>
+        )
+    }
+    if (productState.status === 'error') {
+        return (
+            <div>
+                <p>Error fetching data</p>
+            </div>
+        )
+    }
+    if (productState.status === 'success') {
+        return (
+            <div>
+                {
+                    productState.data.map(p => (
+                        <p key={p.id}>Product Name: {p.name} - ${p.price}</p>
+                    ))
+                }
+            </div>
+        )
+    }
 }

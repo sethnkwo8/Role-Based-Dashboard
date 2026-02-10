@@ -1,4 +1,5 @@
 export type Role = 'Admin' | 'SuperAdmin' | 'User' | 'Staff'
+import type { Permission } from "./permissions"
 
 export interface User {
     username: string
@@ -14,4 +15,5 @@ export interface AuthContextType {
     authState: AuthState
     login(username: string, role: Role): void
     logout(): void
+    can(permission: Permission): boolean
 }

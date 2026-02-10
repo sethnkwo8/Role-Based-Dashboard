@@ -1,5 +1,6 @@
 import type { AuthContextType, AuthState, Role } from "./auth.types";
 import { createContext, useState } from "react";
+import { hasPermission, ROLE_PERMISSIONS, type Permission } from "./permissions";
 
 interface AuthProviderProps {
     children: React.ReactNode
@@ -18,10 +19,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setAuthState({ status: 'unauthenticated' })
     }
 
+    function can(permission: Permission): boolean {
+        if (authState.status === 'authenticated') {
+            return hasPermission(authState.user, permission)
+        }
+        return false
+    }
+
     const value: AuthContextType = {
         authState,
         login,
-        logout
+        logout,
+        can
     }
     return <AuthContext.Provider value={value}>
         {children}
